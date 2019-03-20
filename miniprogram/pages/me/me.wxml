@@ -1,0 +1,27 @@
+<view>
+  <view wx:if="{{!hasUserInfo && canIUse}}" animation="{{animationData}}" style="background:#4582E4;height:100px;width:100%">
+    <view animation="{{animationData1}}">
+      <button class='btn1' style="{{flag}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" size="mini">点击登陆</button>
+    </view>
+  </view>
+  <block wx:else>
+    <view class='thehead'>
+      <view class="userinfo">
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </view>
+
+      <view class='userinfo' style='margin-left: 230rpx;'>
+      
+      我的文章 <view style='color: blue;'><navigator url="../myArticle/myArticle?theopenid={{theopenid}}" open-type='navigate' hover-class='none'>{{myarticlenum}}</navigator></view> 篇
+
+      </view>
+
+    </view>
+  </block>
+</view>
+<view wx:if="{{myarticlenum}}" class="thecontainer" style='background-color: white'>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view>

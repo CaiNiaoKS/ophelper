@@ -1,0 +1,6 @@
+<input class="thetitle" name="thetitle" value="{{titlevalue}}" placeholder="请输入标题 ..." bindinput="titleInput" maxlength='30' />
+<textarea class="thecontent" name="thecontent" maxlength='-1' value="{{contentvalue}}" placeholder="在此开始你的创作 ..." bindinput="contentInput">
+</textarea>
+<view class='articlebtn'>
+<button style='margin-left: 18%;' type="{{btnstatus}}" bindtap='articleclear' >清 空</button> <button type="{{btnstatus}}" bindtap='articlesubmit' >提 交</button>
+</view>

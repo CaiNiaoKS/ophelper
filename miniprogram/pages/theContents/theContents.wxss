@@ -1,0 +1,16 @@
+/* pages/theContents/theContents.wxss */
+
+.tr {
+  display: flex;
+  width: 100%;
+  margin-right: 4px;
+  border-bottom: 4px solid #f3f5f8;
+  border-left: 4px solid #f3f5f8;
+  border-right: 4px solid #f3f5f8;
+  justify-content: center;
+  word-wrap: break-word;
+}
+
+.bg-g{
+  background: white;
+}

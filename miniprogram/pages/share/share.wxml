@@ -1,0 +1,41 @@
+<view style='height: 55rpx;background-color: #4582E4;'>
+  <view class='thehead'>
+    <text style='margin-left: 20%;color: white;'>共{{articlenum}}篇</text>
+    <text style='margin-left: 25rpx;color: white;'>今日新增{{newarticlenum}}篇</text>
+      <navigator url="../addArticle/addArticle" open-type='navigate' hover-class='none'>
+        <image class='addbtnImg' src='../../images/add48jd.png'></image>
+      </navigator>
+  </view>
+</view>
+<view wx:if="{{noarticle}}" style='display: flex;flex-direction: row;justify-content: center;margin-top: 50%;'>{{noarticle}}</view>
+
+<view wx:if="{{titlehead}}" style='margin-top: 10rpx;background-color: white;'>
+  <view wx:if="{{titlehead}}">
+  
+    <view class="hostinfos">
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text style='font-weight: bolder;'>{{titlehead}} </text>
+        </view>
+        <view class='td-2'>
+          <text style='font-weight: bolder;'> {{inserttimehead}}\n</text>
+        </view>
+      </view>
+    </view>
+  <view wx:for="{{articleResult}}" wx:key="{{index}}">
+    
+    <view class="hostinfos">
+      <view class='tr bg-g'>
+        <view class='td-1'>
+        <navigator wx:if="{{articleResult}}" url="../theContents/theContents?thetitle={{item.title}}" open-type='navigate' hover-class='fonttype'>
+          <text>{{item.title}}</text>
+        </navigator>
+        </view>
+        <view class='td-2'>
+          <text> {{item.insertdate}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  </view>
+</view>

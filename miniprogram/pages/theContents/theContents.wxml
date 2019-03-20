@@ -1,0 +1,12 @@
+<view wx:if="{{thearticleResult}}">
+  <view wx:for="{{thearticleResult}}" wx:key="{{index}}">
+
+    <view class='tr bg-g'>
+      <text>{{item.title}}</text>
+    </view>
+    <view class='tr bg-g'>
+      <text> {{item.contents}}</text>
+    </view>
+
+  </view>
+</view>

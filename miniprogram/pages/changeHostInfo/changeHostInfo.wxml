@@ -1,0 +1,56 @@
+<view class="container">
+<view class="textView" wx:if="{{ip}}">
+  <text class="code">{{ip}}</text>
+</view>
+<view class="textView" wx:if="{{Cname}}">
+  <text class="code">{{Cname}}</text>
+</view>
+</view>
+<view wx:if="{{ip}}">
+  <view wx:for="{{ip}}" wx:key="{{index}}">
+    <text class='textView' style="color:#A6A6A6;margin-left:5px;">[查询结果]</text>
+    <view class="hostinfos">
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>生产IP </text>
+        </view>
+        <view class='td-2'>
+          <input style='margin-right: 1rem;' value='{{item.ip}}' disabled='true'/>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 平台信息部分 -->
+<view wx:if="{{ptResult}}">
+  <view wx:for="{{ptResult}}" wx:key="{{index}}">
+    <text class='textView' style="color:#A6A6A6;margin-left:5px;">[待修改信息]</text>
+    <view class="hostinfos">
+        <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>平台名称 </text> 
+        </view>
+        <view class='td-2'>
+        <input style='margin-right: 1rem;' value='{{item.platform}}}' disabled='true'/>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>平台地址 </text>
+        </view>
+        <view class='td-2' style='word-wrap: break-word;'>
+        <input style='margin-right: 1rem;' value='{{item.addr}}}' disabled='true'/>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>备注 </text>
+        </view>
+        <view class='td-2'>
+          <input style='margin-right: 1rem;' value='{{item.commonts}}}' disabled='true'/>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

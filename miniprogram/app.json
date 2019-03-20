@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/userConsole/userConsole",
+    "pages/chooseLib/chooseLib",
+    "pages/share/share",
+    "pages/me/me",
+    "pages/test1/test1",
+    "pages/test2/test2",
+    "pages/changeHostInfo/changeHostInfo",
+    "pages/opm/opm",
+    "pages/addArticle/addArticle",
+    "pages/theContents/theContents",
+    "pages/myArticle/myArticle"
+  ],
+  "tabBar": {
+    "color": "#464a56",
+    "selectedColor": "#6595e9",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "信息查询",
+        "iconPath": "images/search48.png",
+        "selectedIconPath": "images/searched48.png"
+      },
+      {
+        "pagePath": "pages/share/share",
+        "text": "精彩共享",
+        "iconPath": "images/share48.png",
+        "selectedIconPath": "images/shared48.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的领域",
+        "iconPath": "images/user48.png",
+        "selectedIconPath": "images/usered48.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundColor": "#f3f5f8",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#4582E4",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
+  }
+}

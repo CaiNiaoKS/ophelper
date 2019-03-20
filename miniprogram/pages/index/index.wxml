@@ -1,0 +1,433 @@
+<!--index.wxml-->
+<view>
+  <swiper class='swiper-box' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}" wx:key="unique">
+      <swiper-item>
+        <image src="{{item.img}}" bindtap='click_swiper' data-url="{{item.url}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- <view class="dots"> 
+      <block wx:for="{{imgUrls}}" wx:key="unique"> 
+        <view class="dot"></view> 
+      </block> 
+  </view> -->
+</view>
+<!-- <view class="container"> -->
+<!-- 查询主机信息 -->
+<view>
+<view style="display:inline-flex" class="inputView">
+  <input class="input" name="ipinfo" type="digit" placeholder="请输入ip地址 ..." bindinput="bindKeyInput" maxlength='15' value='{{scanResult}}' focus="{{getfocus}}" />
+  <image wx:if="{{inputValue}}" class="img1" bindtap='clear' src="../../images/close-circle48.png"></image>
+  <image class="img" bindtap='scanTool' src="../../images/scan32.png"></image>
+</view>
+<scroll-view style="z-index: {{scrollindex}};" scroll-y="true" class="scrollview">
+<view wx:if="{{tempresult}}">
+   <view wx:for="{{tempresult}}" wx:key="{{index}}">
+    <view id="{{item.IP}}" bindtap="itemtap" class="itemview">{{item.IP}} {{item.Cname}}</view>
+   </view>
+</view>
+</scroll-view>
+</view>
+<view class='indexbtn'>
+  <button class='btn-proinfo' bindtap="onQuery1">
+    <image class='indexbtnImg' src='{{btn_proinfo_img}}'></image>
+    <view style='color: {{proinfoclolor}}'>生产信息</view>
+  </button>
+
+  <button class='btn-disinfo' bindtap="onQuery2">
+    <image class='indexbtnImg' src='{{btn_disinfo_img}}'></image>
+    <view style='color: {{disinfoclolor}}'>灾备信息</view>
+  </button>
+
+  <button class='btn-disinfo' bindtap="onQuery3">
+    <image class='indexbtnImg' src='{{btn_ptinfo_img}}'></image>
+    <view style='color: {{ptinfoclolor}}'>平台信息</view>
+  </button>
+
+  <view style="color:#4582E4;">
+    <navigator wx:if="{{scanResult}}" url="../opm/opm?ip={{scanResult}}" open-type='navigate' hover-class='none'>
+      <button class='btn-ophelper' bindtap="onQuery4">
+        <image class='indexbtnImg' src='{{btn_ophelper_img}}'></image>
+        <view style='color: {{ophelperclolor}}'>运维指引</view>
+      </button>
+    </navigator>
+  </view>
+  <!-- <button class="searchButon" type="primary" bindtap="onQuery1">查询主机信息</button> -->
+</view>
+<view wx:if="{{zbResult}}">
+  <view wx:for="{{zbResult}}" wx:key="IP">
+    <text class='textView' style="color:#A6A6A6;margin-left:5px;">[查询结果]</text>
+    <view class="hostinfos">
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>生产IP </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.IP}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>灾备IP </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.DIP}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>应用端口 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.AppPort}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>私网地址 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.PrivateIP}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>域名 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.DomainName}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>应用中文名称 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.Cname}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>应用英文简称 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.Ename}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>主机名 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.HostName}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>应用用户 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.AppUser}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>F5地址 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.F5IP}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>F5端口 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.F5Port}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>应用组件名 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.AssemblyName}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>进程名 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.Process}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>UCD信息 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.UCDInfo}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>NAS信息 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.NASInfo}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>挂载地址 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.MountAddr}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>附加信息 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.AttachInfo}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>使用状态 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.Status}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>上线时间 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.OnlineDate}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>下线时间 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.OffineDate}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>应用维护A角 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.OwnerA}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>应用维护B角 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.OwnerB}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>开发接口人 </text>
+        </view>
+        <view class='td-2'>
+          <text style='margin-right: 1rem;'> {{item.Developer}}\n</text>
+        </view>
+      </view>
+
+
+    </view>
+    <!-- <view style="color:#4582E4;height: 48rpx;width: 48rpx;">
+      <navigator url="../opm/opm?ip={{inputValue}}" open-type='navigate' hover-class='none'>
+        <image class="moreimg" src="../../images/ios-more.png"></image>
+      </navigator>
+    </view> -->
+  </view>
+  <view class="commentsView" wx:if="{{comments2}}">
+    <view style="color:#A6A6A6">
+      {{comments2}}
+    </view>
+    <view style="color:#4582E4">
+      <navigator url="../changeHostInfo/changeHostInfo?ip={{scanResult}}" open-type='navigate' hover-class='none'>「{{changelink}}」
+      </navigator>
+    </view>
+  </view>
+</view>
+<view wx:if="{{queryResult}}">
+  <view wx:for="{{queryResult}}" wx:key="IP">
+    <text class='textView' style="color:#A6A6A6;margin-left:5px;">[查询结果]</text>
+    <view class="hostinfos">
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>IP地址 </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.IP}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>F5 IP </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.F5IP}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>应用中文名称 </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.Cname}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>应用英文简称 </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.Ename}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>应用用户 </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.AppUser}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>应用组件名称 </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.Module}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>主机名 </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.HostName}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>应用服务端口 </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.AppPort}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>进程名 </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.Process}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>UCD相关信息 </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.UCDInfo}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>开发主责人 </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.Developer}}\n</text>
+        </view>
+      </view>
+    </view>
+    <!-- <view style="color:#4582E4;height: 48rpx;width: 48rpx;">
+      <navigator url="../opm/opm?ip={{inputValue}}" open-type='navigate' hover-class='none'>
+        <image class="moreimg" src="../../images/ios-more.png"></image>
+      </navigator>
+    </view> -->
+  </view>
+  <view class="commentsView" wx:if="{{comments1}}">
+    <view style="color:#A6A6A6">
+      {{comments1}}
+    </view>
+    <view style="color:#4582E4">
+      <navigator url="../changeHostInfo/changeHostInfo?ip={{scanResult}}" open-type='navigate' hover-class='none'>「{{changelink}}」
+      </navigator>
+    </view>
+  </view>
+</view>
+<view wx:if="{{ptResult}}">
+  <text class='textView' style="color:#A6A6A6;margin-left:5px;">{{checkresult}}</text>
+  <view wx:for="{{ptResult}}" wx:key="platform">
+    
+    <view class="hostinfos">
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>平台名称 </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.platform}}\n</text>
+        </view>
+      </view>
+      <view class='tr bg-g2'>
+        <view class='td-1'>
+          <text>平台地址 </text>
+        </view>
+        <view class='td-2' style='word-wrap: break-word;'>
+          <text style='margin-right: 1rem;'> {{item.addr}}</text>
+        </view>
+      </view>
+      <view class='tr bg-g'>
+        <view class='td-1'>
+          <text>备注 </text>
+        </view>
+        <view class='td-2'>
+          <text> {{item.commonts}}\n</text>
+        </view>
+      </view>
+    </view>
+    <!-- <view style="color:#4582E4;height: 48rpx;width: 48rpx;">
+      <navigator url="../opm/opm?ip={{inputValue}}" open-type='navigate' hover-class='none'>
+        <image class="moreimg" src="../../images/ios-more.png"></image>
+      </navigator>
+    </view> -->
+  </view>
+  <view class="commentsView" wx:if="{{comments3}}">
+    <view style="color:#A6A6A6">
+      {{comments3}}
+    </view>
+    <view style="color:#4582E4">
+      <navigator url="../changeHostInfo/changeHostInfo?thetype='3'" open-type='navigate' hover-class='none'>「{{changelink}}」
+      </navigator>
+    </view>
+  </view>
+</view>
+<view class="emptResultView" wx:if="{{emptResult1}}">
+  <view style="color:#e64340" class="code">{{emptResult1}}</view>
+  <view style="color:#4582E4" bindtap='inputFocus'>[{{emptResult2}}]</view>
+  <view style="color:#e64340">{{emptResult3}}</view>
+</view>
+<view class="textView" style="align-items: center;" wx:if="{{noResult}}">
+  <view>
+    <image class="gifimg" src="../../images/img-9828.gif" ></image>
+  </view>
+  <view>
+    <text class="textView" style="align-items: center;">{{noResult}}</text>
+  </view>
+</view>
+<!-- </view> -->
